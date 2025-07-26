@@ -1,0 +1,85 @@
+.hero-container {
+  position: relative;
+  height: 100vh;
+  background-color: #000;
+  background-image: url('https://www.transparenttextures.com/patterns/circuit-board.png');
+  animation: scrollBackground 20s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  overflow: hidden;
+}
+
+@keyframes scrollBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.loader {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 300px;
+  height: 20px;
+  border: 2px solid #0f0;
+  background: #111;
+  margin: 10px auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(to right, #00ff00, #66ff66);
+  transition: width 0.2s ease;
+}
+
+.percentage {
+  color: #0f0;
+  font-family: monospace;
+  font-size: 1.5rem;
+}
+
+.final-message {
+  position: absolute;
+  z-index: 3;
+  top: 60%;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.final-message h1 {
+  font-size: 3rem;
+  color: #0f0;
+}
+
+.final-message p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

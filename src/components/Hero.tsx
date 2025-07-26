@@ -1,61 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-
-const heroLines = [
-  "📦 Expertise automatisme industriel",
-  "🌐 Supervision, IHM et transformation digitale",
-  "🔐 Cybersécurité industrielle & audit réseau",
-  "🛠️ Maintenance, support & mise en service",
-];
+import React from "react";
+import Terminal from "./Terminal";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const finalTextRef = useRef<HTMLDivElement>(null);
-  const [cursorVisible, setCursorVisible] = useState(false);
-
-  useEffect(() => {
-    if (!containerRef.current || !progressBarRef.current || !finalTextRef.current) return;
-
-    containerRef.current.innerHTML = "";
-    progressBarRef.current.style.width = "0%";
-    finalTextRef.current.textContent = "";
-    finalTextRef.current.style.opacity = "0";
-    setCursorVisible(false);
-
-    let index = 0;
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    function showNextLine() {
-      if (!containerRef.current || !progressBarRef.current || !finalTextRef.current) return;
-
-      if (index < heroLines.length) {
-        const line = document.createElement("div");
-        line.className = "line";
-        line.textContent = heroLines[index];
-        containerRef.current.appendChild(line);
-
-        const progressPercent = ((index + 1) / heroLines.length) * 100;
-        progressBarRef.current.style.width = progressPercent + "%";
-
-        index++;
-        timeoutId = setTimeout(showNextLine, 1200);
-      } else {
-        setCursorVisible(true);
-        progressBarRef.current.style.width = "100%";
-
-        timeoutId = setTimeout(() => {
-          finalTextRef.current!.textContent = "✅ Chargement terminé — Prêt à démarrer.";
-          finalTextRef.current!.style.opacity = "1";
-        }, 1300);
-      }
-    }
-
-    showNextLine();
-
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  // Scroll handlers pour boutons
   const scrollToContact = () => {
     const el = document.getElementById("contact");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -145,38 +91,10 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Terminal et barre de progression */}
-      <div
-        className="terminal-container bg-black bg-opacity-90 p-8 rounded-xl shadow-[0_0_25px_#FACC15] max-w-xl w-full text-yellow-400 font-mono text-lg relative z-10"
-        aria-live="polite"
-        aria-atomic="true"
-        role="region"
-      >
-        <div ref={containerRef}></div>
-        <span
-          className={`cursor inline-block bg-yellow-400 w-3 h-[1.2em] ml-2 align-bottom ${
-            cursorVisible ? "animate-blink" : "opacity-0"
-          }`}
-          aria-hidden="true"
-        />
-        <div
-          className="progress-bar-container mt-6 w-full h-3 bg-yellow-900 rounded overflow-hidden shadow-[0_0_10px_#FACC15]"
-          aria-label="Progression du chargement"
-        >
-          <div
-            ref={progressBarRef}
-            className="progress-bar h-full bg-yellow-400 rounded shadow-[0_0_15px_#FACC15] transition-width duration-1000 ease"
-            style={{ width: "0%" }}
-          />
-        </div>
-        <div
-          ref={finalTextRef}
-          className="final-text mt-4 font-bold opacity-0 transition-opacity duration-700"
-          aria-live="polite"
-        />
-      </div>
+      {/* Terminal animé */}
+      <Terminal />
 
-      {/* Boutons */}
+      {/* Boutons navigation */}
       <div className="relative z-10 flex flex-col sm:flex-row gap-6 mt-10 w-full max-w-sm justify-center">
         <button
           onClick={scrollToRealisations}
@@ -193,37 +111,6 @@ export default function Hero() {
           Contact
         </button>
       </div>
-
-      <style jsx>{`
-        .line {
-          opacity: 0;
-          margin-bottom: 0.5rem;
-          animation: fadeInUp 0.8s forwards;
-        }
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes blink {
-          0%,
-          50% {
-            opacity: 1;
-          }
-          51%,
-          100% {
-            opacity: 0;
-          }
-        }
-        .animate-blink {
-          animation: blink 1s steps(2, start) infinite;
-        }
-      `}</style>
     </section>
   );
 }
