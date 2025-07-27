@@ -8,15 +8,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo et signature */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center space-x-2 mb-4 group transition-all duration-300">
               <img 
                 src="/Logo Initiales Nominatif Moderne Minimaliste Noir Coloré.png" 
                 alt="M2A Automation Logo" 
-               className="h-16 w-auto bg-white rounded-lg p-2 shadow-lg"
+                className="h-16 w-auto drop-shadow-[0_0_6px_rgba(234,179,8,0.6)] group-hover:scale-105 group-hover:drop-shadow-[0_0_10px_rgba(234,179,8,0.9)] transition-all duration-300" 
               />
               <div className="ml-2">
-                <div className="text-white font-orbitron font-bold text-xl tracking-wider">AUTOMATION</div>
-                <div className="text-yellow-500 text-xs font-medium">SOLUTIONS INDUSTRIELLES</div>
+                <div className="font-orbitron font-bold text-xl tracking-wider">
+                  <span className="text-yellow-500 drop-shadow-[0_0_4px_rgba(234,179,8,0.9)]">M2A </span>
+                  <span className="text-white drop-shadow-[0_0_4px_rgba(234,179,8,0.4)]">Automation</span>
+                </div>
               </div>
             </div>
             <p className="text-gray-400 italic text-lg mb-4">
